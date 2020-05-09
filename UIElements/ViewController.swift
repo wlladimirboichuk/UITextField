@@ -1,10 +1,4 @@
-//
-//  ViewController.swift
-//  UIElements
-//
-//  Created by Debash on 07.05.2018.
-//  Copyright © 2018 swiftbook.ru. All rights reserved.
-//
+
 
 import UIKit
 
@@ -13,6 +7,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var slider: UISlider!
+    @IBOutlet weak var textField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,5 +53,30 @@ class ViewController: UIViewController {
         let backgrandColor = self.view.backgroundColor
         self.view.backgroundColor = backgrandColor?.withAlphaComponent(CGFloat(sender.value))
     }
+    
+    // Проверка ввода 
+    @IBAction func donePressed(_ sender: UIButton) {
+        
+        guard textField.text?.isEmpty == false else { return }
+        
+        if let _ = Double(textField.text!) {
+            
+            let alert = UIAlertController(title: "Wrong format", message: "Please enter your name", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+            
+            print("Name format is wrong")
+            
+        } else {
+            
+            label.text = textField.text
+            textField.text = nil
+        }
+        
+        
+    }
+    
 }
 
